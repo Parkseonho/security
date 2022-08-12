@@ -23,6 +23,6 @@ spring:
       cache: false
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/security_for-lecture?serverTimezone=Asia/Seoul
-    username: xanqus
-    password: 1234
+    url: jdbc:mysql://localhost:3306/sbb?serverTimezone=Asia/Seoul
+    username: sbsst
+    password: sbs123414
