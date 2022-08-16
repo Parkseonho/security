@@ -28,6 +28,7 @@ public class PrincipalDetails implements UserDetails {
     }
 
     // 해당 User의 권한을 리턴하는곳
+    // User의 롤을 긁어온다?
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> collect = new ArrayList<>();
@@ -40,17 +41,17 @@ public class PrincipalDetails implements UserDetails {
         return collect;
     }
 
-    @Override
+    @Override // 암호화된 패스워드를 가져온다.
     public String getPassword() {
         return user.getPassword();
     }
 
-    @Override
+    @Override // 중복이 안되는 고유한값이어야함
     public String getUsername() {
         return user.getUsername();
     }
 
-    @Override
+    @Override // User가 만료된것인지 아닌지 확인
     public boolean isAccountNonExpired() {
         return true;
     }
@@ -65,7 +66,7 @@ public class PrincipalDetails implements UserDetails {
         return true;
     }
 
-    @Override
+    @Override // 마지막 로그인을 확인하여 활성화 상태를 구분할 수 있음
     public boolean isEnabled() {
         return true;
     }
