@@ -3,6 +3,9 @@ package com.example.security_forlecture.controller;
 import com.example.security_forlecture.dao.UserRepository;
 import com.example.security_forlecture.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,8 +22,17 @@ public class IndexController {
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @GetMapping({"","/"})
-    public String index() {
+    public String index(@AuthenticationPrincipal UserDetails userDetails) {
+        if(userDetails  !=null){
+            System.out.println(userDetails.getAuthorities());
+        }
         return "index";
+    }
+
+    @Secured("ROLE_ADMIN")
+    @GetMapping("/user_info_data")
+    public String info(){
+        return "민감한 정보";
     }
 
     @GetMapping("/user")
